@@ -1,0 +1,41 @@
+﻿<Page
+    x:Class="LeilaoApp.UWP.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LeilaoApp.UWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <NavigationView IsSettingsVisible="False" ItemInvoked="NavigationView_ItemInvoked" PaneDisplayMode="Top"
+                        BackRequested="NavigationView_BackRequested"
+                        IsBackEnabled="{x:Bind AppFrame.CanGoBack, Mode=OneWay}" >
+            <NavigationView.PaneFooter >
+                <StackPanel Orientation="Horizontal">
+                    <NavigationViewItem Content="Logout" Icon="NewWindow" 
+                                        x:Name="btnLogout"
+                                        Tapped="btnLogout_Tapped"
+                                        Visibility="{x:Bind UserViewModel.IsLogged, Mode=OneWay}" Margin="-50,0,0,0"/>
+                </StackPanel>
+            </NavigationView.PaneFooter>
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="Home" Icon="Home" 
+                                    Tag="home" />
+                <NavigationViewItem Content="Categorias" Icon="Library"
+                                    Tag="categories" 
+                                    Visibility="{x:Bind UserViewModel.IsLogged, Mode=OneWay}" />
+                <NavigationViewItem Content="Minhas Compras" Icon="Shop" Tag="minhascompras"
+                                    Visibility="{x:Bind UserViewModel.IsLogged, Mode=OneWay}"/>
+                <NavigationViewItem Content="Favoritos" Icon="Favorite" Tag="favoritos"
+                                    Visibility="{x:Bind UserViewModel.IsLogged, Mode=OneWay}"/>
+                <NavigationViewItem Content="Meus Produtos" Icon="Shop" Tag="products"
+                                    Visibility="{x:Bind UserViewModel.IsLogged, Mode=OneWay}"/>
+                <NavigationViewItem Content="Categoria Adm" Icon="Manage" Tag="cat_adm" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}"/>
+                <NavigationViewItem Content="Produtos Adm" Icon="Manage" Tag="prod_adm" Visibility="{x:Bind UserViewModel.IsAdmin, Mode=OneWay}"/>
+            </NavigationView.MenuItems>
+            <Frame x:Name="frame" Padding="10" />
+        </NavigationView>
+    </Grid>
+
+</Page>

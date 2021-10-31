@@ -1,0 +1,60 @@
+﻿<Page
+    x:Class="LeilaoApp.UWP.Views.Categories.Categoria_Usuario"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LeilaoApp.UWP.Views.Categories"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:models="using:LeilaoApp.Domain.Models"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Categorias Usuario" Style="{StaticResource HeaderTextBlockStyle}" />
+            <CommandBar Grid.Column="1" VerticalAlignment="Center" x:Name="mainCommandBar"
+                        Background="Transparent" OverflowButtonVisibility="Collapsed"
+                        DefaultLabelPosition="Right">
+            </CommandBar>
+        </Grid>
+        <ListView ItemsSource="{x:Bind CategoryViewModel.Categories}" Grid.Row="1">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate  x:DataType="models:Category">
+                    <Grid Tapped="Grid_Tapped">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <FlyoutBase.AttachedFlyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <TextBlock Text="Isto é a categoria:" />
+                                    <TextBlock Text="{x:Bind Name}"/>
+                                </StackPanel>
+                            </Flyout>
+                        </FlyoutBase.AttachedFlyout>
+                        <TextBlock Style="{StaticResource TitleTextBlockStyle}"
+                                   Text="{x:Bind Name}" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+    </Grid>
+</Page>

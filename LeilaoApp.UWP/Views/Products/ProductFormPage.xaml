@@ -1,0 +1,83 @@
+﻿<Page
+    x:Class="LeilaoApp.UWP.Views.Products.ProductFormPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LeilaoApp.UWP.Views.Products"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Adicionar/editar Produto" Style="{StaticResource HeaderTextBlockStyle}"/>
+            <CommandBar Grid.Column="1"  VerticalAlignment="Center"                         
+                        x:Name="mainCommandBar" Background="Transparent"      
+                        OverflowButtonVisibility="Collapsed"
+                        DefaultLabelPosition="Right">
+                <AppBarButton
+                    x:Name="btnSave"
+                    Click="btnSave_Click"
+                    Icon="Save"
+                    Label="Guardar"
+                    IsEnabled="{x:Bind ProductViewModel.Valid, Mode=OneWay}"
+                    ToolTipService.ToolTip="Guardar">
+                    <FlyoutBase.AttachedFlyout>
+                        <Flyout>
+                            <Border Background="#dc3545" Padding="10">
+                                <TextBlock Text="Produto já existe." Foreground="White"/>
+                            </Border>
+                        </Flyout>
+                    </FlyoutBase.AttachedFlyout>
+                </AppBarButton>
+                <AppBarButton
+                    x:Name="btnCancel"
+                    Click="btnCancel_Click"
+                    Icon="Cancel"
+                    Label="Cancelar"
+                    ToolTipService.ToolTip="Cancelar" />
+
+            </CommandBar>
+
+        </Grid>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel>
+
+                <!-- TODO: Use combobox as an alternative to AutoSuggestBox
+                    DO NOT use both -->
+                <ComboBox x:Name="categories" Header="Categoria" ItemsSource="{x:Bind CategoryViewModel.Categories}"
+                          SelectedValue="{x:Bind ProductViewModel.CategoryName, Mode=TwoWay}"
+                          SelectedValuePath="Name"/>
+                <!--<AutoSuggestBox x:Name="AutoSuggestBox"
+                    Header="Category" QueryIcon="Find" DisplayMemberPath="Name"
+                    Text="{x:Bind ProductViewModel.CategoryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    TextChanged="AutoSuggestBox_TextChanged"
+                    QuerySubmitted="AutoSuggestBox_QuerySubmitted"
+                    SuggestionChosen="AutoSuggestBox_SuggestionChosen"/> -->
+                <TextBox Header="Nome" x:Name="name" 
+                    Text="{x:Bind ProductViewModel.ProductName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Header="Descriçao" x:Name="descricao"
+                    Text="{x:Bind ProductViewModel.Descricao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="123" />
+                <TextBox Header="Valor" x:Name="valor"
+                    Text="{x:Bind ProductViewModel.Valor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Header="Tempo de Leilão" x:Name="fimleilao"
+                    Text="{x:Bind ProductViewModel.tempo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Image Margin="0,10" x:Name="thumb" MaxWidth="500" MaxHeight="500"
+                       Source="{x:Bind ProductViewModel.Thumb, Converter={StaticResource bytesToImageConverter}, Mode=OneWay}"/>
+                <Button x:Name="btnThumb" Margin="0,10" Content="Escolher thumb..." Tapped="btnThumb_Tapped"/>
+                <Border Background="Red" BorderBrush="Black" BorderThickness="2" Margin="5"
+                    Visibility="{x:Bind ProductViewModel.Invalid, Mode=OneWay}">
+                    <TextBlock Text="Produto inválido"/>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

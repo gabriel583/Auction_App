@@ -1,0 +1,38 @@
+﻿<ContentDialog
+    x:Class="LeilaoApp.UWP.Views.Users.RegisterDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LeilaoApp.UWP.Views.Users"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Registro Utilizador"
+    PrimaryButtonText="Registrar"
+    SecondaryButtonText="Cancelar"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+
+    <StackPanel>
+        <TextBox x:Name="username" Header="Username" Text="{x:Bind UserViewModel.User.Username, Mode=TwoWay}" />
+        <PasswordBox x:Name="password" Header="Password" Password="{x:Bind UserViewModel.User.Password, Mode=TwoWay}" />
+        <TextBox x:Name="nome" Header="Nome" Text="{x:Bind UserViewModel.User.Nome, Mode=TwoWay}" />
+        <TextBox x:Name="email" Header="Email" Text="{x:Bind UserViewModel.User.Email, Mode=TwoWay}" />
+
+        <Border Background="Red" BorderBrush="Black" BorderThickness="2" Margin="0,10" Padding="5" 
+                Visibility="{x:Bind UserViewModel.ShowError, Mode=OneWay}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition  Width="9*"/>
+                </Grid.ColumnDefinitions>
+
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE1E0;" />
+                <TextBlock Grid.Column="1" VerticalAlignment="Center"
+                           Margin="0" Text="Falha no registo" />
+
+            </Grid>
+        </Border>
+
+    </StackPanel>
+
+</ContentDialog>

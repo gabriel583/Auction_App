@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="LeilaoApp.UWP.Views.Home.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LeilaoApp.UWP.Views.Home"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Canvas>
+            <TextBlock Text="Leiloeiro" FontSize="100" Margin="452,64,424,537"  FontFamily="Bauhaus 93" />
+            <Image x:Name="image" Height="300"  Width="300" Stretch="Fill"
+               Source="/Assets/marteloleilao.png" Margin="490,60,490,360" Canvas.Left="10" Canvas.Top="135" />
+        </Canvas>
+        <Button x:Name="logar" Content="Logar" Margin="345,520,0,0" VerticalAlignment="Top" Height="80" Width="200" 
+                Click="Logar_Click" Visibility="{x:Bind UserViewModel.IsNotLogged, Mode=OneWay}"  CornerRadius="30"/>
+        <Button x:Name="registrar" Content="Registrar" Margin="745,520,0,0" VerticalAlignment="Top" Height="80" Width="200"
+                Click="Registrar_Click" Visibility="{x:Bind UserViewModel.IsNotLogged, Mode=OneWay}" RenderTransformOrigin="1.2,0.462" CornerRadius="30" />
+    </Grid>
+</Page>
